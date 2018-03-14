@@ -10,7 +10,7 @@ class SectorFive < Gosu::Window
   # Constants
   WIDOW_HEIGHT    = 600
   WINDOW_WIDTH    = 800
-  ENEMY_FREQUENCY = 0.05
+  ENEMY_FREQUENCY = 0.01
 
   def initialize
     super(WINDOW_WIDTH, WIDOW_HEIGHT)
@@ -40,7 +40,6 @@ class SectorFive < Gosu::Window
     # Turn the ship left or right with button press
     @player.turn_left if button_down?(Gosu::KbLeft)
     @player.turn_right if button_down?(Gosu::KbRight)
-
     # Accelerate when the up arrow is pressed
     @player.accelerate if button_down?(Gosu::KbUp)
     @player.move
@@ -56,18 +55,32 @@ class SectorFive < Gosu::Window
     @bullets.each do |bullet|
       bullet.move
     end
-
+    #
+    @explosions.each do |explosion|
+      explosion.move
+    end
+    #
     @enemies.dup.each do |enemy|
       @bullets.dup.each do |bullet|
         distance = Gosu.distance(enemy.x, enemy.y, bullet.x, bullet.y)
         if distance < enemy.radius + bullet.radius
           @enemies.delete enemy
           @bullets.delete bullet
-          @explosions.push Explosion.new(self, enemy.x, enemy.y)
+          @explosions.push Explosion.new(self, enemy.x, enemy.y, @player.angle)
         end
       end
     end
-
+    #
+    @enemies.dup.each do |enemy|
+      @explosions.dup.each do |explosion|
+        distance = Gosu.distance(enemy.x, enemy.y, explosion.x, explosion.y)
+        if distance < enemy.radius + explosion.radius
+          @enemies.delete enemy
+          @explosions.push Explosion.new(self, enemy.x, enemy.y, @player.angle)
+        end
+      end
+    end
+    #
     @explosions.dup.each do |explosion|
       @explosions.delete explosion if explosion.finished
     end

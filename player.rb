@@ -34,6 +34,30 @@ class Player
     @angle += ROTATION_SPEED
   end
 
+  def go_backwards
+    if @angle == 0
+      @y += 5
+    elsif @angle == -180 || @angle == -180
+      @y -= 5
+    elsif @angle < 0 && @angle > -90
+      # We are facing the top left of the screen
+      @y += 5
+      @x += 5
+    elsif @angle < 0 && @angle < -90
+      # We are facing the bottom left of the screen
+      @y -= 5
+      @x += 5
+    elsif @angle > 0 && @angle < 90
+      # We are facing the top right of the screen
+      @y += 5
+      @x -= 5
+    else
+      # We are facing the bottom right of the screen
+      @y -= 5
+      @x -= 5
+    end
+  end
+
   # Accelerate the ship
   def accelerate
     @velocity_x += Gosu.offset_x(@angle, ACCELERATION)
