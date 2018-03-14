@@ -1,6 +1,8 @@
 # This class is responsible for the player object
 class Player
 
+  attr_reader :x, :y, :angle, :radius
+  
   # Constants
   ROTATION_SPEED = 3
   ACCELERATION = 2

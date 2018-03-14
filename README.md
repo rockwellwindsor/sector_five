@@ -15,7 +15,9 @@ Sector Five uses four different types of sprites
 
 To start the game cd into the directory and run the following command
 
-`$ ruby sector_five.rb`
+  * `bundle install`
+
+  * `$ ruby sector_five.rb`
 
 ## Documentation
 

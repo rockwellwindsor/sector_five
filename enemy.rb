@@ -1,6 +1,8 @@
 # This class is responsible for the enemy objects
 class Enemy
 
+  attr_reader :x, :y, :radius
+  
   # Constants
   SPEED = 4
 
