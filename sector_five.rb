@@ -13,7 +13,7 @@ class SectorFive < Gosu::Window
   # Constants
   WIDOW_HEIGHT    = 600
   WINDOW_WIDTH    = 800
-  ENEMY_FREQUENCY = 0.7
+  ENEMY_FREQUENCY = 0.03
   MAX_ENEMIES     = 1000
 
   def initialize

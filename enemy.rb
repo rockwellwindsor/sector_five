@@ -4,7 +4,6 @@ class Enemy
   attr_reader :x, :y, :radius
   
   # Constants
-  
 
   def initialize(window)
     @radius = 20
